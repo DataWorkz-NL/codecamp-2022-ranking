@@ -49,7 +49,9 @@ let rank = 1;
 			<div class="c-media">
 				
 				<div class="c-media__content">
-					<div class="c-media__title">${member.name}</div>
+					<div class="c-media__title">Team: ${member.name}</div>
+          <div class="c-media__title">Nickname: ${member.nickname}</div>
+          <div class="c-media__title">Makers: ${member.authors}</div>
 					
 				</div>
 			</div>
