@@ -42,6 +42,8 @@ let rank = 1;
   rankingArray.forEach((member) => {
     let newRow = document.createElement("li");
     member.rank = rank;
+    member.hr =
+      Math.round((member.score / member.runs + Number.EPSILON) * 100) / 100;
     newRow.classList = "c-list__item";
     newRow.innerHTML = `
 		<div class="c-list__grid">
@@ -58,7 +60,11 @@ let rank = 1;
 			<div class="u-text--right c-kudos">
 				<div class="u-mt--8">
 					<strong>${member.score}</strong> ${randomEmoji()}
+          runs: ${member.runs}
 				</div>
+        <div>
+          HR: ${member.hr}
+        </div>
 			</div>
 		</div>
 	`;
