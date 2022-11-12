@@ -52,7 +52,7 @@ let rank = 1;
 					<div class="c-media__title">Team: ${member.name}</div>
           <div class="c-media__title">Nickname: ${member.nickname}</div>
           <div class="c-media__title">Makers: ${member.authors}</div>
-					
+          <div class="c-media__title">Runs: ${member.runs}</div>
 				</div>
 			</div>
 			<div class="u-text--right c-kudos">
