@@ -1,4 +1,4 @@
-console.clear();
+// console.clear();
 
 
 async function getRanking() {
@@ -89,7 +89,100 @@ let rank = 1;
   let sortedTeam = rankingArray.sort((a, b) => b.score - a.score);
   let winner = sortedTeam[0];
 
+  const ctx = document.getElementById("myChart");
+  const myChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      datasets: [
+        {
+          label: "# of Votes",
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+          ],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
 
 }
+
+(() => {
+  // const urlParams = new URLSearchParams(window.location.search);
+  const id = 1;
+
+  /*  const bracketsStore = JSON.parse(localStorage.getItem('brackets'));  */
+
+  const bracketsStore = JSON.parse(bracketsNew);
+
+  if (null === bracketsStore ) {
+    alert("Key is not found in data!");
+    return;
+  }
+
+  const data = bracketsStore[id];
+  console.log(data);
+
+  // You can manually add locales. English will be used as a fallback if keys are missing.
+  // You can force browser language detection by setting the `i18nextLng` property to a locale key (ex: 'ru') in the localStorage.
+  window.bracketsViewer.addLocale("ru", {
+    common: {
+      "round-name": "раунд {{roundNumber}}",
+    },
+  });
+
+  // This is optional. You must do it before render().
+  window.bracketsViewer.setParticipantImages(
+    data.participant.map((participant) => ({
+      participantId: participant.id,
+      imageUrl: "https://github.githubassets.com/pinned-octocat.svg",
+    }))
+  );
+
+  window.bracketsViewer.onMatchClicked = (match) => console.log(match);
+
+  window.bracketsViewer
+    .render(
+      {
+        stages: data.stage,
+        matches: data.match,
+        matchGames: data.match_game,
+        participants: data.participant,
+      },
+      {
+        selector: "#brackets",
+        participantOriginPlacement: "before",
+        separatedChildCountLabel: true,
+        showSlotsOrigin: true,
+        showLowerBracketSlotsOrigin: true,
+        highlightParticipantOnHover: true,
+      }
+    )
+    .then(() => console.log("Render finished"));
+})();
+
 
 renderRanking();
