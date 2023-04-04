@@ -156,6 +156,18 @@ bracketsNew = `{
                "position":2,
                "score":0,
                "result":"loss"
+            },
+            "opponent3":{
+               "id":0,
+               "position":1,
+               "score":2,
+               "result":"loss"
+            },
+            "opponent4":{
+               "id":1,
+               "position":2,
+               "score":0,
+               "result":"loss"
             }
          },
          {
